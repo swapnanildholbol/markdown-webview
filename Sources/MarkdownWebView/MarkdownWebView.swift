@@ -146,10 +146,9 @@ import WebKit
             public func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage) {
                 switch message.name {
                 case "sizeChangeHandler":
-                    guard let contentHeight = message.body as? CGFloat,
-                          platformView.contentHeight != contentHeight
+                    guard let contentHeight = message.body as? CGFloat
                     else { return }
-                    platformView.contentHeight = contentHeight
+                    platformView.contentHeight = contentHeight + 50
                     platformView.invalidateIntrinsicContentSize()
                 case "renderedContentHandler":
                     guard let renderedContentHandler = parent.renderedContentHandler,

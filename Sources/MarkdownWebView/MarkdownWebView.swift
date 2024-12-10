@@ -52,11 +52,11 @@ import WebKit
         #endif
 
         public func onLinkActivation(_ linkActivationHandler: @escaping (URL) -> Void) -> Self {
-            .init(markdownContent, customStylesheet: customStylesheet, linkActivationHandler: linkActivationHandler, renderedContentHandler: renderedContentHandler)
+            .init(markdownContent, customStylesheet: customStylesheet, extraBottomPadding: extraBottomPadding, linkActivationHandler: linkActivationHandler, renderedContentHandler: renderedContentHandler)
         }
 
         public func onRendered(_ renderedContentHandler: @escaping (String) -> Void) -> Self {
-            .init(markdownContent, customStylesheet: customStylesheet, linkActivationHandler: linkActivationHandler, renderedContentHandler: renderedContentHandler)
+            .init(markdownContent, customStylesheet: customStylesheet, extraBottomPadding: extraBottomPadding, linkActivationHandler: linkActivationHandler, renderedContentHandler: renderedContentHandler)
         }
 
         public class Coordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler {

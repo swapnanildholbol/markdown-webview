@@ -12,19 +12,22 @@ import WebKit
     public struct MarkdownWebView: PlatformViewRepresentable {
         let markdownContent: String
         let customStylesheet: String?
+        let extraBottomPadding: CGFloat
         let linkActivationHandler: ((URL) -> Void)?
         let renderedContentHandler: ((String) -> Void)?
 
-        public init(_ markdownContent: String, customStylesheet: String? = nil) {
+        public init(_ markdownContent: String, customStylesheet: String? = nil, extraBottomPadding: CGFloat = 0.0) {
             self.markdownContent = markdownContent
             self.customStylesheet = customStylesheet
+            self.extraBottomPadding = extraBottomPadding
             linkActivationHandler = nil
             renderedContentHandler = nil
         }
 
-        init(_ markdownContent: String, customStylesheet: String?, linkActivationHandler: ((URL) -> Void)?, renderedContentHandler: ((String) -> Void)?) {
+        init(_ markdownContent: String, customStylesheet: String?, extraBottomPadding: CGFloat = 0.0, linkActivationHandler: ((URL) -> Void)?, renderedContentHandler: ((String) -> Void)?) {
             self.markdownContent = markdownContent
             self.customStylesheet = customStylesheet
+            self.extraBottomPadding = extraBottomPadding
             self.linkActivationHandler = linkActivationHandler
             self.renderedContentHandler = renderedContentHandler
         }
@@ -148,7 +151,7 @@ import WebKit
                 case "sizeChangeHandler":
                     guard let contentHeight = message.body as? CGFloat
                     else { return }
-                    platformView.contentHeight = contentHeight + 50
+                    platformView.contentHeight = contentHeight + extraBottomPadding
                     platformView.invalidateIntrinsicContentSize()
                 case "renderedContentHandler":
                     guard let renderedContentHandler = parent.renderedContentHandler,

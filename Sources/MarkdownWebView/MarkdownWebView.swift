@@ -151,7 +151,7 @@ import WebKit
                 case "sizeChangeHandler":
                     guard let contentHeight = message.body as? CGFloat
                     else { return }
-                    platformView.contentHeight = contentHeight + extraBottomPadding
+                    platformView.contentHeight = contentHeight + parent.extraBottomPadding
                     platformView.invalidateIntrinsicContentSize()
                 case "renderedContentHandler":
                     guard let renderedContentHandler = parent.renderedContentHandler,
